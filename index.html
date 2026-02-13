@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ved 💕</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffd6e8, #ffe9f3, #e0f7fa);
+    font-family: 'Segoe UI', cursive;
+    overflow: hidden;
+}
+
+/* PASSWORD SCREEN */
+.lock-screen {
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    padding: 30px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 350px;
+    box-shadow: 0 10px 30px rgba(255,182,193,0.3);
+}
+
+.lock-screen input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10px;
+    width: 80%;
+    text-align: center;
+}
+
+.lock-screen button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #ff9ecf;
+    color: white;
+    cursor: pointer;
+}
+
+/* MAIN CONTAINER */
+.container {
+    display: none;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 30px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+    position: relative;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #ff6fa5;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #c77dff;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    position: relative;
+    height: 120px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.yes-btn {
+    background-color: #ff9ecf;
+    color: white;
+}
+
+.no-btn {
+    background-color: #cdb4db;
+    color: white;
+    position: absolute;
+    left: 60%;
+    top: 50%;
+}
+
+.message {
+    margin-top: 15px;
+    display: none;
+    animation: fadeIn 1s ease forwards;
+}
+
+.thought {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #9d4edd;
+}
+
+.anniversary {
+    margin-top: 12px;
+    font-weight: bold;
+    color: #7b2cbf;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="lock-screen" id="lockScreen">
+    <h2>💌 Enter Our Special Date</h2>
+    <input type="password" id="passwordInput" placeholder="DD/MM/YY">
+    <br>
+    <button onclick="checkPassword()">Unlock 💕</button>
+</div>
+
+<!-- MAIN SITE -->
+<div class="container" id="mainContent">
+    <h1>Ved 💕</h1>
+    <div class="subtitle">Will you be my Valentine?</div>
+
+    <div class="buttons">
+        <button class="yes-btn" onclick="sayYes()">Yes 💖</button>
+        <button class="no-btn" id="noBtn">No 💔</button>
+    </div>
+
+    <div class="message" id="message">
+        <h3>YAYYY 🥹💘</h3>
+
+        <div class="thought">
+            Out of all the moments in my life,  
+            my favorite ones are the ones that somehow lead back to you.  
+            You feel like comfort, like home, like forever. 💗
+        </div>
+
+        <p style="margin-top: 20px; color: #a87adf; font-size: 1rem; line-height: 1.4; max-width: 320px; margin-left: auto; margin-right: auto;">
+            Life after meeting you has changed—for the better, truly.  
+            Now, everything feels incomplete without you by my side. 💜
+            On this Valentines , I want to thank you for all those moments you held my hands when I needed support. 
+            I still remember the day I said Yes , the happiness and joy on your face was so visible and on that moment I felt 
+            I'm the most lucky girl!
+            I LOVE YOU 
+            </p>
+
+        <div class="anniversary">
+            The Day everything changed for good : 10/10/24 💞
+        </div>
+    </div>
+</div>
+
+<script>
+const correctPassword = "10/10/24";
+
+function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    if (input === correctPassword) {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+    } else {
+        alert("Wrong date 🥺 Try again.");
+    }
+}
+
+const noBtn = document.getElementById("noBtn");
+const container = document.getElementById("mainContent");
+const message = document.getElementById("message");
+
+function moveButton() {
+    const rect = container.getBoundingClientRect();
+    const maxX = rect.width - noBtn.offsetWidth;
+    const maxY = rect.height - noBtn.offsetHeight;
+
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+}
+
+noBtn.addEventListener("touchstart", moveButton);
+noBtn.addEventListener("mouseover", moveButton);
+
+function sayYes() {
+    message.style.display = "block";
+    createHearts();
+}
+
+function createHearts() {
+    for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }
+}
+</script>
+
+</body>
+</html>
